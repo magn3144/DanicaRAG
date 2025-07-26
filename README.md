@@ -35,6 +35,15 @@ This script defines the core `RAG` class that powers the question-answering syst
     5.  **Creates QA Chain**: It builds a `RetrievalQA` chain, combining the retriever with an `OpenAI` LLM (`gpt-4.1`). It injects a custom Danish prompt to guide the model's responses.
 - **`query(question)`**: Takes a user's question, invokes the QA chain, and prints the answer along with the source documents that were used to generate it.
 
+### 3. `app.py`
+
+This script provides a simple web interface for the RAG chatbot using Streamlit.
+
+- It initializes the `RAG` system.
+- It provides a text input for the user to ask questions.
+- It displays the answer returned by the RAG system.
+- It caches the RAG system to avoid reloading the model on each interaction.
+
 ## Setup
 
 1.  **Clone the repository:**
@@ -54,9 +63,21 @@ This script defines the core `RAG` class that powers the question-answering syst
     OPENAI_API_KEY='your_openai_api_key'
     ```
 
-## Usage
+## Web Interface
 
-The system is typically used from a script or a Jupyter Notebook (like `test.ipynb`).
+This project includes a Streamlit application to interact with the RAG model through a user-friendly web interface.
+
+To run the web app, execute the following command in your terminal:
+
+```bash
+streamlit run app.py
+```
+
+This will start a local web server and open the application in your browser. You can then enter your questions about Danica Pension and receive answers from the chatbot.
+
+## Programmatic Usage
+
+The system can also be used from a script or a Jupyter Notebook (like `test.ipynb`).
 
 1.  **Import the necessary classes:**
     ```python
