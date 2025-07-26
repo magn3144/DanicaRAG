@@ -16,7 +16,7 @@ URLS = [
 ]
 
 # --- App Title ---
-st.title("Danica Pension RAG 🤖")
+st.title("Danica Pension Chatbot")
 st.write("Stil et spørgsmål om din pension hos Danica, og få svar baseret på deres officielle dokumentation.")
 
 # --- Model Loading ---
