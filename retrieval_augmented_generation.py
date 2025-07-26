@@ -12,7 +12,22 @@ from dotenv import load_dotenv
 
 
 class RAG:
+    """
+    A class to implement a Retrieval-Augmented Generation (RAG) system.
+    This class handles the setup of the RAG pipeline, including document splitting,
+    embedding, vector storage, and the creation of a question-answering chain.
+    """
     def __init__(self, parent_chunk_size: int, parent_chunk_overlap: int, child_chunk_size: int, child_chunk_overlap: int, k: int) -> None:
+        """
+        Initializes the RAG class with configuration parameters for document processing.
+
+        Args:
+            parent_chunk_size (int): The character size of the parent chunks.
+            parent_chunk_overlap (int): The character overlap between parent chunks.
+            child_chunk_size (int): The character size of the child chunks.
+            child_chunk_overlap (int): The character overlap between child chunks.
+            k (int): The number of documents to retrieve for context.
+        """
         self.parent_chunk_size = parent_chunk_size
         self.parent_chunk_overlap = parent_chunk_overlap
         self.child_chunk_size = child_chunk_size
@@ -21,7 +36,15 @@ class RAG:
         self.qa_chain = None
 
     def setup(self, documents: list) -> None:
-        """Sets up the RAG system by initializing the necessary components."""
+        """
+        Sets up the RAG system by initializing the necessary components.
+
+        This method configures the document splitters, vector store, retriever,
+        and the question-answering chain with a custom prompt.
+
+        Args:
+            documents (list): A list of Document objects to be indexed.
+        """
 
         # Load environment variables
         load_dotenv()
@@ -81,7 +104,16 @@ class RAG:
             chain_type_kwargs={"prompt": custom_prompt},
         )
     
-    def query(self, question: str) -> dict:
+    def query(self, question: str) -> str:
+        """
+        Executes a query against the RAG system.
+
+        Args:
+            question (str): The question to be answered.
+
+        Returns:
+            str: The result from the QA chain, containing the answer and source documents.
+        """
         if self.qa_chain is None:
             raise RuntimeError("RAG system is not set up. Please call setup() before querying.")
         result = self.qa_chain.invoke({"query": question})

@@ -7,10 +7,13 @@ import os
 
 def scrape_web_page(url):
     """
-    Fetches the raw text of a webpage.
-    
+    Fetches the raw text of a webpage and converts it into a Document object.
+
     Args:
         url (str): The URL of the webpage to scrape.
+
+    Returns:
+        Document: A Document object containing the page content and the source URL as metadata.
     """
     
     # Send a GET request to the webpage
@@ -28,13 +31,13 @@ def scrape_web_page(url):
 
 def scrape_pdf(url):
     """
-    Fetches the raw text of a PDF file.
-    
+    Fetches and extracts text from a PDF file, returning it as a list of Document objects.
+
     Args:
         url (str): The URL of the PDF file to scrape.
     
     Returns:
-        Document: A Document object containing the PDF content.
+        list: A list of Document objects, where each object typically represents a page of the PDF.
     """
     
     # Download the PDF file
@@ -57,13 +60,16 @@ def scrape_pdf(url):
 
 def scrape_pages(urls):
     """
-    Scrapes multiple webpages / PDFs and returns their content as a list of Document objects.
-    
+    Scrapes a list of URLs, which can be web pages or PDFs, and returns their content.
+
+    This function iterates through a list of URLs, determines the content type (PDF or HTML),
+    and uses the appropriate scraper.
+
     Args:
         urls (list): A list of URLs to scrape.
     
     Returns:
-        list: A list of Document objects containing the scraped content.
+        list: A list of Document objects containing the scraped content from all sources.
     """
     
     documents = []
