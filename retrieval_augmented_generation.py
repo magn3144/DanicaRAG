@@ -35,7 +35,7 @@ class RAG:
         self.k = k
         self.qa_chain = None
 
-    def setup(self, documents: list) -> None:
+    def setup(self, documents: list, verbose: bool = False) -> None:
         """
         Sets up the RAG system by initializing the necessary components.
 
@@ -75,9 +75,11 @@ class RAG:
             search_kwargs={"k": self.k}
         )
 
-        print("Adding documents to the retriever...")
+        if verbose:
+            print("Adding documents to the retriever...")
         retriever.add_documents(documents, ids=None)
-        print(f"Retriever indexed {len(vector_store.get()['ids'])} child chunks and {len(doc_store.store)} parent documents.")
+        if verbose:
+            print(f"Retriever indexed {len(vector_store.get()['ids'])} child chunks and {len(doc_store.store)} parent documents.")
 
         # Initialize the LLM with an OpenAI model
         llm = ChatOpenAI(model="gpt-4.1", temperature=0.4)
@@ -104,7 +106,7 @@ class RAG:
             chain_type_kwargs={"prompt": custom_prompt},
         )
     
-    def query(self, question: str) -> str:
+    def query(self, question: str, verbose: bool = False) -> str:
         """
         Executes a query against the RAG system.
 
@@ -118,13 +120,14 @@ class RAG:
             raise RuntimeError("RAG system is not set up. Please call setup() before querying.")
         result = self.qa_chain.invoke({"query": question})
 
-        print(f"\n--- Query: {question} ---")
-        print(f"\n--- Answer: {result['result']} ---")
+        if verbose:
+            print(f"\n--- Query: {question} ---")
+            print(f"\n--- Answer: {result['result']} ---")
 
-        if 'source_documents' in result:
-            print("\n--- Source Documents Used (Parent Documents): ---")
-            for i, doc in enumerate(result['source_documents']):
-                # Note: The 'page' metadata will come from the parent document if preserved by the loader
-                print(f"Parent Document {i+1} (Page {doc.metadata.get('page', 'N/A')}): {doc.page_content}\n----------------------\n")
+            if 'source_documents' in result:
+                print("\n--- Source Documents Used (Parent Documents): ---")
+                for i, doc in enumerate(result['source_documents']):
+                    # Note: The 'page' metadata will come from the parent document if preserved by the loader
+                    print(f"Parent Document {i+1} (Page {doc.metadata.get('page', 'N/A')}): {doc.page_content}\n----------------------\n")
 
         return result['result']

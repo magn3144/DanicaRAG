@@ -12,7 +12,13 @@ URLS = [
     "https://danica.dk/privat/din-pension/dine-investeringsmuligheder/alle-investeringsprodukter/danica-balance",
     "https://danica.dk/om-danica-pension/kort-om-os",
     "https://danica.dk/privat/find-hjaelp/pensionsopsparing-og-indbetaling/overfoerelse-af-pensionopsparing#content-list-0-item-0",
-    "https://danica.dk/-/media/pdf/danica-pension/dk/forsikringsbetingelser/daekning-ved-sundhedssikring.pdf"
+    "https://danica.dk/-/media/pdf/danica-pension/dk/forsikringsbetingelser/daekning-ved-sundhedssikring.pdf",
+    "https://danica.dk/privat/din-pension/dine-investeringsmuligheder/alle-investeringsprodukter",
+    "https://danica.dk/privat/din-pension/dine-investeringsmuligheder/alle-investeringsprodukter/danica-link#content-list-0-item-2",
+    "https://danica.dk/privat/din-pension/dine-investeringsmuligheder/alle-investeringsprodukter/danica-select",
+    "https://danica.dk/privat/din-pension/dine-investeringsmuligheder/alle-investeringsprodukter/danica-flex",
+    "https://danica.dk/privat/din-pension/dine-investeringsmuligheder/alle-investeringsprodukter/danica-traditionel",
+    "https://danica.dk/privat/din-pension/dine-investeringsmuligheder/alle-investeringsprodukter/tidspension",
 ]
 
 # --- App Title ---
